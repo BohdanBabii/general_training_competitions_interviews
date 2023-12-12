@@ -4,15 +4,17 @@
 #endif
 
 #include <cassert>
+#include <cstdlib>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 struct Binary_Tree_Node {
-  int data;
-  Binary_Tree_Node *left;
-  Binary_Tree_Node *right;
+    int data;
+    Binary_Tree_Node *left;
+    Binary_Tree_Node *right;
 };
-
 /************** begin assignment **************/
 // Implement a function to check if a binary tree is a binary search tree (BST).
 // A binary search tree satisfies the condition:
@@ -49,15 +51,60 @@ struct Binary_Tree_Node {
 
 // write a helper function if you need to
 // TODO: write code here
+void inorderTraversalHelper(const Binary_Tree_Node *node, std::vector<int> &res) {
+    if (node != nullptr) {
+        inorderTraversalHelper(node->left, res);
+        res.push_back(node->data);
+        inorderTraversalHelper(node->right, res);
+    }
+}
+
+std::vector<int> inorderTraversal(const Binary_Tree_Node *node) {
+    std::vector<int> res;
+    inorderTraversalHelper(node, res);
+    return res;
+}
 
 bool is_binary_search_tree(const Binary_Tree_Node *node) {
-  // TODO: write code here
-  return false;
+    std::vector<int> res;
+    res = inorderTraversal(node);
+    for (int i = 1; i < res.size(); i++) {
+        if (res[i] <= res[i - 1]) {
+            return false;
+        }
+    }
+    return true;
 }
 
 int main() {
-  // TODO: Thoroughly test function "is_binary_search_tree" 
-  // (include also duplicate values in the tests).
-
+    {
+        Binary_Tree_Node *tree = new Binary_Tree_Node{2, new Binary_Tree_Node{1, nullptr, nullptr}, new Binary_Tree_Node{3, nullptr, nullptr}};
+        assert(is_binary_search_tree(tree) == true);
+    }
+    {
+        Binary_Tree_Node *tree = new Binary_Tree_Node{2, new Binary_Tree_Node{3, nullptr, nullptr}, new Binary_Tree_Node{1, nullptr, nullptr}};
+        assert(is_binary_search_tree(tree) == false);
+    }
+    {
+        Binary_Tree_Node *tree = nullptr;
+        assert(is_binary_search_tree(tree) == true);
+    }
+    {
+        Binary_Tree_Node *tree = new Binary_Tree_Node{2, new Binary_Tree_Node{2, nullptr, nullptr}, new Binary_Tree_Node{3, nullptr, nullptr}};
+        assert(is_binary_search_tree(tree) == false);
+    }
+    {
+        Binary_Tree_Node *tree = new Binary_Tree_Node{1, nullptr, new Binary_Tree_Node{2, nullptr, new Binary_Tree_Node{3, nullptr, nullptr}}};
+        assert(is_binary_search_tree(tree) == true);
+    }
+    {
+        Binary_Tree_Node *tree = new Binary_Tree_Node{-2, new Binary_Tree_Node{-3, nullptr, nullptr}, new Binary_Tree_Node{-1, nullptr, nullptr}};
+        assert(is_binary_search_tree(tree) == true);
+    }
+    {
+        Binary_Tree_Node *tree = new Binary_Tree_Node{2, new Binary_Tree_Node{3, nullptr, nullptr}, new Binary_Tree_Node{1, nullptr, nullptr}};
+        assert(is_binary_search_tree(tree) == false);
+    }
+    cout << "all tests passed" << endl;
 }
 /*************** end assignment ***************/
