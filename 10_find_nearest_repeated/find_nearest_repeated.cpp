@@ -33,68 +33,81 @@ using namespace std;
 // Read here how to use unordered_map in C++.
 // https://www.geeksforgeeks.org/unordered_map-in-cpp-stl/
 
-
-
 // struct for returning the closest pair indices
 struct Nearest_Entries {
-  size_t index_1;
-  size_t index_2;
+    size_t index_1;
+    size_t index_2;
 
-  // for testing your implementation (you don't need this)
-  bool operator==(const Nearest_Entries &rhs) const {
-    return index_1 == rhs.index_1 && index_2 == rhs.index_2;
-  }
-  bool operator!=(const Nearest_Entries &rhs) const { return !(rhs == *this); }
+    // for testing your implementation (you don't need this)
+    bool operator==(const Nearest_Entries &rhs) const {
+        return index_1 == rhs.index_1 && index_2 == rhs.index_2;
+    }
+    bool operator!=(const Nearest_Entries &rhs) const { return !(rhs == *this); }
 };
 
 Nearest_Entries find_nearest_repeated(const vector<string> &words) {
-  Nearest_Entries nearest_entries{0, 0};
+    Nearest_Entries nearest_entries{0, 0};
+    unordered_map<string, size_t> lastDuplicate;
+    size_t minDistance = numeric_limits<size_t>::max();
+    size_t currentDistance;
+    string word;
+    for (size_t i = 0; i < words.size(); ++i) {
+        word = words[i];
 
-  // TODO: write code here
+        if (lastDuplicate.find(word) != lastDuplicate.end()) {
+            currentDistance = i - lastDuplicate[word];
+            if (currentDistance < minDistance) {
+                minDistance = currentDistance;
+                nearest_entries = {lastDuplicate[word], i};
+            }
+        }
 
-  return nearest_entries;
+        lastDuplicate[word] = i;
+    }
+
+    return nearest_entries;
 }
 
 /*************** end assignment ***************/
 
 int main() {
-  {
-    vector<string> words;
-    Nearest_Entries nearest_entries{0, 0};
-    assert(find_nearest_repeated(words) == nearest_entries);
-  }
-  {
-    vector<string> words{"cat", "dog"};
-    Nearest_Entries nearest_entries{0, 0}; // all words different
-    assert(find_nearest_repeated(words) == nearest_entries);
-  }
-  {
-    vector<string> words{"cat", "cat"};
-    Nearest_Entries nearest_entries{0, 1};
-    assert(find_nearest_repeated(words) == nearest_entries);
-  }
-  {
-    vector<string> words{"cat", "dog", "cat", "dog", "cat"};
-    Nearest_Entries nearest_entries{0, 2}; // cat appears before dog
-    assert(find_nearest_repeated(words) == nearest_entries);
-  }
-  {
-    vector<string> words{"cat", "dog", "bird", "cow",
-                         "cat", "dog", "cow",  "cat"};
-    Nearest_Entries nearest_entries{3, 6}; // cow appears before cat
-    assert(find_nearest_repeated(words) == nearest_entries);
-  }
-  {
-    vector<string> words{"cat", "dog", "bird", "cow", "fox"};
-    Nearest_Entries nearest_entries{0, 0}; // all words different
-    assert(find_nearest_repeated(words) == nearest_entries);
-  }
-  {
-    vector<string> words{"all",   "work", "and", "no",     "play",
-                         "makes", "for",  "no",  "work",   "no",
-                         "fun",   "and",  "no",  "results"};
-    Nearest_Entries nearest_entries{7, 9};
-    assert(find_nearest_repeated(words) == nearest_entries);
-  }
-  cout << "all tests passed" << endl;
+    {
+        vector<string> words;
+        Nearest_Entries nearest_entries{0, 0};
+        assert(find_nearest_repeated(words) == nearest_entries);
+    }
+    {
+        vector<string> words{"cat", "dog"};
+        Nearest_Entries nearest_entries{0, 0};  // all words different
+        assert(find_nearest_repeated(words) == nearest_entries);
+    }
+    {
+        vector<string> words{"cat", "cat"};
+        Nearest_Entries nearest_entries{0, 1};
+        assert(find_nearest_repeated(words) == nearest_entries);
+    }
+    {
+        vector<string> words{"cat", "dog", "cat", "dog", "cat"};
+        Nearest_Entries nearest_entries{0, 2};  // cat appears before dog
+        assert(find_nearest_repeated(words) == nearest_entries);
+    }
+    {
+        vector<string> words{"cat", "dog", "bird", "cow",
+                             "cat", "dog", "cow", "cat"};
+        Nearest_Entries nearest_entries{3, 6};  // cow appears before cat
+        assert(find_nearest_repeated(words) == nearest_entries);
+    }
+    {
+        vector<string> words{"cat", "dog", "bird", "cow", "fox"};
+        Nearest_Entries nearest_entries{0, 0};  // all words different
+        assert(find_nearest_repeated(words) == nearest_entries);
+    }
+    {
+        vector<string> words{"all", "work", "and", "no", "play",
+                             "makes", "for", "no", "work", "no",
+                             "fun", "and", "no", "results"};
+        Nearest_Entries nearest_entries{7, 9};
+        assert(find_nearest_repeated(words) == nearest_entries);
+    }
+    cout << "all tests passed" << endl;
 }

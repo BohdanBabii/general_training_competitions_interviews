@@ -5,8 +5,8 @@
 
 #include <algorithm>
 #include <cassert>
-#include <vector>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -39,32 +39,39 @@ using namespace std;
 // (there is an even number of tasks,
 // a single task duration is between 0 and 10000)
 unsigned int optimal_duration(const vector<unsigned int> &tasks) {
-  unsigned int total_duration = 0;
+    unsigned int maxDuration = 0;
 
-  // TODO: write your code here
-  
-  return total_duration;
+    vector<unsigned int> tasksSorted = tasks;
+    sort(tasksSorted.begin(), tasksSorted.end());
+
+    int workersNum = tasksSorted.size() / 2;
+    for (int i = 0; i < workersNum; i++) {
+        unsigned int currentDuration = tasksSorted[i] + tasksSorted[tasksSorted.size() - i - 1];
+        maxDuration = max(maxDuration, currentDuration);
+    }
+
+    return maxDuration;
 }
 
 /*************** end assignment ***************/
 
 int main() {
-  assert(optimal_duration({}) == 0); // no tasks, duration is 0
-  assert(optimal_duration({1, 3}) == 4);
-  assert(optimal_duration({8, 1, 10, 9}) == 17);
-  assert(optimal_duration({5, 2, 1, 6, 4, 4}) == 8);
-  assert(optimal_duration({1523, 5338, 2914, 1546, 7274, 3263, 1240,
-                           4284, 9461, 8142, 6582, 3714, 5527, 9641,
-                           2886, 5401, 9727, 4254, 9874, 478}) == 11164);
-  assert(optimal_duration(
-             {1909, 5799, 6360, 5445, 9563, 3214, 4260, 558,  7246, 3888, 3000,
-              3516, 7321, 7538, 1307, 9093, 4005, 3017, 3455, 5253, 2302, 7400,
-              9437, 401,  3237, 4624, 2421, 6913, 416,  9824, 8809, 6431, 6576,
-              2411, 9519, 1989, 7771, 9022, 5368, 5802, 6197, 7018, 1101, 2697,
-              6546, 2920, 9358, 294,  4757, 1643, 1435, 3959, 6999, 7935, 63,
-              704,  1193, 8332, 9484, 9926, 1256, 2248, 4466, 1691, 2974, 6503,
-              1617, 1277, 872,  7219, 7627, 5636, 7587, 7219, 1962, 3340, 4141,
-              1067, 9914, 108,  6327, 5395, 4015, 5559, 2692, 1280, 4230, 2134,
-              394,  2076, 6338, 8912, 5171, 9028, 2957, 5112}) == 10123);
-  cout << "all tests passed" << endl;
+    assert(optimal_duration({}) == 0);  // no tasks, duration is 0
+    assert(optimal_duration({1, 3}) == 4);
+    assert(optimal_duration({8, 1, 10, 9}) == 17);
+    assert(optimal_duration({5, 2, 1, 6, 4, 4}) == 8);
+    assert(optimal_duration({1523, 5338, 2914, 1546, 7274, 3263, 1240,
+                             4284, 9461, 8142, 6582, 3714, 5527, 9641,
+                             2886, 5401, 9727, 4254, 9874, 478}) == 11164);
+    assert(optimal_duration(
+               {1909, 5799, 6360, 5445, 9563, 3214, 4260, 558, 7246, 3888, 3000,
+                3516, 7321, 7538, 1307, 9093, 4005, 3017, 3455, 5253, 2302, 7400,
+                9437, 401, 3237, 4624, 2421, 6913, 416, 9824, 8809, 6431, 6576,
+                2411, 9519, 1989, 7771, 9022, 5368, 5802, 6197, 7018, 1101, 2697,
+                6546, 2920, 9358, 294, 4757, 1643, 1435, 3959, 6999, 7935, 63,
+                704, 1193, 8332, 9484, 9926, 1256, 2248, 4466, 1691, 2974, 6503,
+                1617, 1277, 872, 7219, 7627, 5636, 7587, 7219, 1962, 3340, 4141,
+                1067, 9914, 108, 6327, 5395, 4015, 5559, 2692, 1280, 4230, 2134,
+                394, 2076, 6338, 8912, 5171, 9028, 2957, 5112}) == 10123);
+    cout << "all tests passed" << endl;
 }

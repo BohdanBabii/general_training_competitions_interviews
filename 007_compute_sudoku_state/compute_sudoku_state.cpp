@@ -56,7 +56,7 @@ state compute_sudoku_state(const string &board) {
                 return state::invalid;
             }
             if (currentChar == ' ' || currentChar < '1' || currentChar > '9') {
-                solved = false;  // If any cell is empty or contains an invalid digit, the puzzle is not solved
+                solved = false;
             }
             check_row.insert(currentChar);
         }

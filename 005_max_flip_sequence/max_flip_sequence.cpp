@@ -100,7 +100,7 @@ uint32_t max_flip_sequence_size(uint32_t n) {
             ones = 0;
         }
     }
-    return std::max(longest, left + ones + +1);
+    return std::max(longest, left + ones + 1);
 }
 /*************** end assignment ***************/
 

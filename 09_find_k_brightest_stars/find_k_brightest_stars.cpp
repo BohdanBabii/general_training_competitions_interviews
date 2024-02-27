@@ -21,8 +21,8 @@ using namespace std;
 // you will parse it line by line to extract information about the stars.
 
 struct Star {
-  string name; // name of the star
-  double vmag; // stars brightness (the smaller vmag the brighter the star)
+    string name;  // name of the star
+    double vmag;  // stars brightness (the smaller vmag the brighter the star)
 };
 
 // You get the input file stream "ifs" to the "stars.txt" file and a parameter
@@ -30,52 +30,59 @@ struct Star {
 // stream. Try to extract the "k" brightest stars in O(n * log(k)) time with
 // O(log n) extra space.
 vector<Star> find_k_brightest_stars(ifstream &ifs, const size_t k) {
-  // "result" contains in the end the k brightest stars in sorted order
-  // (brightest first)
-  vector<Star> result;
+    // "result" contains in the end the k brightest stars in sorted order
+    // (brightest first)
+    vector<Star> result;
 
-  auto comparator = [](const Star &a, const Star &b) {
-    // TODO: implement comparator
-    return true;
-  };
-  // use a min heap
-  priority_queue<Star, vector<Star>, decltype(comparator)> min_heap(comparator);
+    auto comparator = [](const Star &a, const Star &b) {
+        return a.vmag > b.vmag;
+    };
+    // use a min heap
+    priority_queue<Star, vector<Star>, decltype(comparator)> min_heap(comparator);
+    string line;
 
-  // TODO: extract k brightest stars from the stream
-  
-
-  // return stars in sorted order (brightest first)
-  return result;
+    while (getline(ifs, line)) {
+        if (line.empty() || line[0] == '#') {
+            continue;
+        }
+        int endOfName = line.find(" ");
+        if (line[endOfName + 1] != ' ') {
+            endOfName = line.find(" ", endOfName + 1);
+        }
+        min_heap.push(Star{line.substr(0, endOfName), stod(line.substr(64, 68))});
+    }
+    for (size_t i = 0; i < k; i++) {
+        result.push_back(min_heap.top());
+        min_heap.pop();
+    }
+    return result;
 }
 /*************** end assignment ***************/
 
 int main() {
-  string path = "stars.txt";
-  ifstream ifs{path}; // open file as a stream
-  if (ifs.fail()) {
-    cerr << "cannot find: " << path << endl;
-    return 1;
-  }
-  size_t k = 8; // k brightest stars
-  vector<Star> brightest_stars = find_k_brightest_stars(ifs, k);
+    string path = "stars.txt";
+    ifstream ifs{path};  // open file as a stream
+    if (ifs.fail()) {
+        cerr << "cannot find: " << path << endl;
+        return 1;
+    }
+    size_t k = 8;  // k brightest stars
+    vector<Star> brightest_stars = find_k_brightest_stars(ifs, k);
 
-  vector<Star> correct_stars{{"Sirius", -1.45},   {"Canopus", -0.62},
-                             {"Arcturus", -0.05}, {"Rigil Kentaurus", -0.01},
-                             {"Vega", 0.03},      {"Capella", 0.08},
-                             {"Rigel", 0.18},     {"Procyon", 0.4}};
+    vector<Star> correct_stars{{"Sirius", -1.45}, {"Canopus", -0.62}, {"Arcturus", -0.05}, {"Rigil Kentaurus", -0.01}, {"Vega", 0.03}, {"Capella", 0.08}, {"Rigel", 0.18}, {"Procyon", 0.4}};
 
-  // test correctness of solution
-  assert(brightest_stars.size() == correct_stars.size());
-  const double epsilon = 1.0e-12; // almost 0
-  for (size_t i = 0; i < brightest_stars.size(); ++i) {
-    assert(abs(brightest_stars[i].vmag - correct_stars[i].vmag) < epsilon);
-    assert(brightest_stars[i].name == correct_stars[i].name);
-  }
+    // test correctness of solution
+    assert(brightest_stars.size() == correct_stars.size());
+    const double epsilon = 1.0e-12;  // almost 0
+    for (size_t i = 0; i < brightest_stars.size(); ++i) {
+        assert(abs(brightest_stars[i].vmag - correct_stars[i].vmag) < epsilon);
+        assert(brightest_stars[i].name == correct_stars[i].name);
+    }
 
-  // output brightest stars
-  for (const auto &star : brightest_stars) {
-    cout << star.name << endl;
-    cout << star.vmag << endl;
-    cout << endl;
-  }
+    // output brightest stars
+    for (const auto &star : brightest_stars) {
+        cout << star.name << endl;
+        cout << star.vmag << endl;
+        cout << endl;
+    }
 }
