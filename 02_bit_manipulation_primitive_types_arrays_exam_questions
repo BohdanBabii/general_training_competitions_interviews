@@ -1,0 +1,16 @@
+How can we exploit bit operations for operations with sets?
+    Bit operations can be used to perform logic operations with sets. For intersection we can use the AND operation, for the union we can use the OR operation, for complement we can use the NOT operation, and for the difference we can use the XOR operation.
+
+
+Explain the difference between arithmetic and logical right shifts for negative signed integers.
+    In the arithmetic right shift, the sign is preserved, so the most significant bit is the same before and after the shift.
+    In the logical right shift, the sign is not preserved, so the most significant bit is always 0.
+
+Outline an algorithm to count the number of bits that are set to 1 in an integer. (no bitset or built-in fuctions)
+    We use the logical right shift and the AND operation to check if the least significant bit is set to 1. If it is we increment the count and shift the number to the right. We repeat this process until the number is 0.
+
+Outline an algorithm to reserve the bits in an unsigned integer (swap bits at position i and n-1).
+    We initialize variable answer with 0 and we check if the bits at position 0 is 1, if it is we set the bit of answer at position 0 to 1 and shift to the left and shift the original number to the right. We repeat this process until the original number is 0.
+
+Imagine you have to reorder integers in an array so that the odd entries appear first. How is this problem to Quicksort's partitioning function?
+    In the quicksort algorithm the partitioning function is being used to divide the array into two parts, one with smaller elements and one with larger elements. The idea is to use the partitioning function to move all odd elements to the left and all even elements to the right.

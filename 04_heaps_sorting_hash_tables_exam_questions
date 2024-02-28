@@ -1,0 +1,19 @@
+Describe briefly the heap data structure.
+    A heap has the tree structure with 2 properties, Shaper property which defines the shape of the heap and the heap property which defines if the each node is greater equal than its children (max heap) or lesser equal than its children (min heap).
+
+How would you find the k longest words in a data stream? (You cannot back up to read an earlier value.)
+    The idea would be to use a priority queue to manage the k longest words, which have been encountered. If a new longer word is found, it would replace the shortest word in the queue.
+
+How would you address the problem of merging multiple sorted files that are too large for RAM?
+    The approach would be to divide the files in chunks which can fit into memory and sort them in-place. Store the chunks temporary in the persistent memory.
+    Then the chunks has to be sorted by using a priority queue, where the smallest element from each chunk is inserted in the output file and then deleted.
+    This process is continued until all chunks are empty.  
+
+What are sorting networks?
+    A sorting network is a network of Compare-and-exchange modules that are the building blocks of this network. The modules are combined so they always sort a fixed-length sequence of values. The execution order is fixed for a network and is not depending on the input values, so no conditionals.
+
+Why sorting may speed up set operations?
+    Sorting can speed up set operations because it enables efficient search and makes intersection and union easier. Sorted sets are easier to iterate.
+
+What is a minimal perfect hash?
+    A minimal has function is hash function which uniquely maps a set of distinct keys to a range of integers. The minimal perfect hash creates a table with no collisions and no empty spaces. 

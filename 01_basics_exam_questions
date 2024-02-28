@@ -1,0 +1,43 @@
+// What is the time complexity, of the following code ?
+
+// Example 2 :
+void print_pairs(const vector<int> &vec) {
+    for (size_t i = 0; i < vec.size(); i++) {
+        for (size_t j = 0; j < vec.size(); j++) {
+            cout << "(" << vec[i] << ", " << vec[j] << ") ";
+        }
+    }
+}
+// The runtime of the code is O(n ^ 2) because the function has two nested loops, where each loop runs n times, where n is the size of the input vector.                                                                                                    Example 8 : uint64_t factorial(uint64_t n) {
+if (n == 0) {
+    return 1;
+} else {
+    return n * factorial(n - 1);
+}
+}
+// The runtime of the code is O(n)
+// because the function calls itself n times, where each call is O(1).
+
+// Example 11:
+uint64_t mod(uint64_t a, uint64_t b) {
+    if (b == 0) {
+        throw overflow_error("Divide by zero exception!");
+    }
+    uint64_t div = a / b;
+    return a - div * b;
+}
+// The runtime of the code is O(1) because the function only performs a few arithmetic operations, which are O(1).
+
+// For each of the following time complexities : O(1), O(log n), O(n), O(n log n), O(n ^ 2) give an algorithmic example.
+// O(1) : Accessing an element in an array by index.
+// O(log n) : Binary search in a sorted array.
+// O(n) : Linear search in an unsorted array.
+// O(n log n) : Merge sort.
+// O(n ^ 2) : Insertion sort.
+
+// Outline the idea of how to retrospectively compute in O(n) the maximum profit when buying and then selling a stock once.
+// Stock prices: [310, 315, 275, 295, 260, 270, 290, 230, 255, 250]
+// The approach would be in tracking the minimum price and the maximum profit, while iterating through the array. We would start by setting the minimum price to prices[0]. Then we would iterate through the array, and for each price, we would update the minimum and maximum profit, by minimum=min(minimum, price) and maximum_profit=max(maximum_profit, price-minimum). Finally, we would return the maximum profit.
+
+// How would you check if string b is a permutation of string a.
+// The idea would be in sorting them both and then comparing them. If they are permutations of each other, then they would be equal after sorting.

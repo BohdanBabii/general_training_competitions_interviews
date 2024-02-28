@@ -1,0 +1,26 @@
+If you need an efficient algorithm to find the shortest path between two nodes in a graph where all edges have length 1, which algorithm would you use and why?
+    I would use the Breadth-First-Search for a graph with edges of length 1. Because BFS will find a solution in a graph, if a solution exists and also this solution will optimal. The time complexity will be O(V+E).
+
+Assume that you need to find a shortest path in a relatively small graph with arbitrary edge lengths, and you have to have a working algorithm very soon. Which algorithm would you choose and why?
+    I would use Dijkstra's shortest path algorithm for a small graph. Because Dijkstra's shortest path performs very well on short graphs and it will find the shortest path from the starting point to all other nodes in the graph.  
+
+Why does Dijkstra’s algorithm not work with negative edge lengths? Give a small example.
+    Dijkstra's shortest path algorithm does not work with negative edge length, because it relies ot the assumption that summing up new vertex weights to the set of visited vertices is providing the shortest path to that vertex. If negative weights exits this assumption is no longer correct and shortest paths are not guaranteed.
+    Example: 
+    Shortest paths found:
+        S -> B with cost of 8
+        S -> A with cost of 6
+    Shortest paths in graph:
+        S -> B with cost of 8
+        S -> B -> A with cost of 8 + (-5) = 3
+
+        S ---- (8) ----- B
+         \             /
+          \           /
+          (6)       (-5)
+            \       /
+             \     /
+              \   /
+                A
+
+Present an extension for Dijkstra’s algorithm (pseudo-code or description) that also returns a list of nodes that form a shortest path. Explain (proof sketch) why that algorithm is correct.

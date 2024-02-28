@@ -1,0 +1,24 @@
+What is an optimal approach (as fast as possible) to compute the n-Queens problem with backtracking?
+    Optimal approach would be systematically trying out possible configurations and checking if every step conflicts with previously placed pieces, if it does the position is rejected and new configuration is generated.
+
+Describe some ideas how to solve the 15-puzzle with backtracking (tell me what you think is important).
+    The idea is to explore possible moves until a legal position is achieved. We could create a search tree, where each node i a game state and every edge is a possible move. 
+    The central piece for solving this puzzle is heuristic function for evaluation of the distance to the final state. The function ca be used to prioritize moves, avoiding and revisiting states and reordering moves efficiently so unnecessary moves are avoided.
+
+Why is efficient parallelization not trivial in most divide and conquer algorithms?
+    Efficient parallelization if often difficult to accomplish  in most divide and conquer algorithms, because of dependencies of each subproblems. Another reason is the communication overhead in parallelization, if the communication part is to large in parallelization it can overshadow the calculating part and vise versa. 
+
+What is the difference between divide and conquer and decrease and conquer?
+    In divide and conquer algorithms, the problem is being divided into small parts, these parts are being solved and the end combined to one solution.
+    In reduce and conquer algorithms, the problems are reduced and solved directly without explicit combining at the end.  
+
+What is dynamic programming? When is it useful?
+    If dynamic programming is used the problem is being solved by combining the solutions of multiple smaller problems.
+    It is useful when there are several overlapping subproblems and in optimizing problem solutions.
+
+Compare the top-down approach with the bottom-up approach used in dynamic programming.
+    Bottom-up approach is an iterative approach. This approach is easier to make if the cache is small.
+    Top down approach is a recursive approach, its easier to implement but can cause a lot of unnecessary calculations.
+
+Present briefly a greedy heuristic of your choice.
+    The Greedy Knapsack heuristic is an heuristic with the idea in filling up limited-space of an knapsack with items to get most value. The approach is to prioritize the items with the best value-to-wight ratio.

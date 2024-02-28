@@ -1,0 +1,24 @@
+How to delete a (non-tail) node from a singly linked list without knowing its predecessor in O(1) time?
+    Copy the data from the next node to the current node. Change the link from the current node to the current.next to the next node from the direct neighbor. So the current node is linked with current.next.next.
+
+Explain the runner technique using a linked list example.
+    The runner technique is technique to iterate through a linked list with two pointer simultaneously at different speeds. For example to find the mid point of a linked list we can use two pointer, one of which is iterating through every node and second pointer is iterating through every second node. Whe the second pointer reaches the end of the list, the first pointer is at midpoint of the list.
+
+If you were to tune the code for speed, how would you implement a stack?
+    I would use the built-in data structure, deque in python. Push and pop operation would use O(1) time complexity.
+
+How can we use a std::list in C++ as a queue?
+    For inserting we can use the method push_back(), and getting the the first pushed_back element in line we can use the methods front() to access the element and pop_front() to remove it from the line.
+
+How does a binary tree and a binary search tree differ?
+    Both trees have for every node at most 2 children. The main difference between these two trees is that in the binary tree there is no specific rule for the order of the node but where in the binary search tree ever node in the left subtree has to have values less than the node's value and all node in the right subtree has to have values greater than the node's value.
+
+Describe the different types of binary tree traversals.
+    There are 3 types:
+        1. Inorder Traversal - at first visit the left subtree, than the current node, than the right subtree
+        2. Preorder Traversal - at first visit the current node, than the left subtree, than the right subtree
+        3. Postorder Traversal - at first visit the left subtree, than the right subtree, than the current node
+
+How does a trie and a radix tree differ?
+    The main difference between those 2 is that a node in a Trie represents only a single character and a node in a Radix Tree represents a sequence of characters.
+        
