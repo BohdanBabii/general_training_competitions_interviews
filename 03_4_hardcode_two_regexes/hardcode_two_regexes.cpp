@@ -173,7 +173,6 @@ inline void clean_coconut(string &s) {
         }
 
         if (digitCount >= 3 && digitCount <= 6) {
-            // Replace digits with spaces
             for (size_t i = 0; i < digitCount; ++i) {
                 pch[i + strlen("Coconut")] = ' ';
             }
