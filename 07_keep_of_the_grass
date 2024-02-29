@@ -1,0 +1,14 @@
+How do you decide how to spend your resources?
+    I spend my resources exclusively to spawning new robots, when myMatter >= 10 a new unit is spawned. 
+
+How do you decide in which directions your bots move?
+    The movement direction of my bots is determined by the Manhattan distance. I sort opponent and free tiles based on their distance and move towards the tile with the shortest distance.
+
+Are there situations where your bots behaved in a suboptimal way? Why does this happen?
+    Yes, during the implementation of the Manhattan Distance function, some bots attempted to move to grass regions, which is not allowed. This occurred because grass tiles were the closest to my bots, leading them to evaluate those tiles as the next location to move to.
+
+What are some heuristics to improve your bots performance? If you implemented them: how did it work? If you did not implement them, argue why you think they should work=
+    The primary heuristic employed was the Manhattan Distance. It worked well for efficiently allocating space.
+
+What did you learn from observing other peoples bots? (At any points of the challenge)
+    Initially, my bots to moved only towards opponent tiles, but this proved inefficient as subsequent bots did not allocate more space. They moved in a queue, leading to no more space allocation.

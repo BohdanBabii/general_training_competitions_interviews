@@ -1,0 +1,9 @@
+1. Argue why topological sortings only exist for acyclic graphs.
+    Topological sorting only exist for acyclic graphs because cycles create dependencies, which making it impossible to lay out a clear linear order of vertices but this order is essential for topological sorting.
+
+
+2. Briefly describe how you approached and solved Project Euler Problem 1.
+    My code iterates from 1 to 1000 and checks if the number is divisible by 3 or 5 and adds it to the result sum.
+
+3. Describe your approach on Project Euler Problem 107: which algorithm did you use and why?
+    I constructed the getMinSpanTree which uses a breadth-first search based approach to construct minimal spanning tree from the input matrix. I used this approach because BFS ensures that all vertices reachable from the starting vertex are visited.

@@ -1,8 +1,10 @@
+#include <cassert>
 #include <climits>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <queue>
 #include <random>
 #include <sstream>
 #include <unordered_map>
@@ -14,7 +16,7 @@ using namespace std;
 vector<vector<int>> getMatrix(const string &file) {
     ifstream ifs(file);
     if (!ifs.is_open()) {
-        cerr << "Error: failed to open " << file << endl;
+        cerr << "Error " << file << endl;
         exit(EXIT_FAILURE);
     }
 
@@ -37,40 +39,32 @@ vector<vector<int>> getMatrix(const string &file) {
     return matrix;
 }
 
-vector<vector<int>> prim_minimal_spanning_tree(const vector<vector<int>> &network) {
-    int n = network.size();
-    vector<vector<int>> minimal_network(n, vector<int>(n, 0));
-    unordered_map<int, bool> visited_vertices;
+vector<vector<int>> getMinSpanTree(const vector<vector<int>> &adjacencyMatrix) {
+    size_t n = adjacencyMatrix.size();
+    vector<vector<int>> minSpanTree(n, vector<int>(n, 0));
+    unordered_set<size_t> visited;
+    queue<size_t> bfsQueue;
 
-    int vertex = 0;
-    visited_vertices[vertex] = true;
+    bfsQueue.push(0);
+    visited.insert(0);
 
-    while (visited_vertices.size() < n) {
-        int min = numeric_limits<int>::max();
-        int minVertex;
+    while (!bfsQueue.empty()) {
+        size_t curVert = bfsQueue.front();
+        bfsQueue.pop();
 
-        for (auto &entry : visited_vertices) {
-            int v = entry.first;
-            for (int i = 0; i < n; i++) {
-                if (!visited_vertices[i] && network[v][i] != 0 && network[v][i] < min) {
-                    min = network[v][i];
-                    minVertex = i;
-                }
+        for (size_t neighbor = 0; neighbor < n; ++neighbor) {
+            if (adjacencyMatrix[curVert][neighbor] != 0 && visited.find(neighbor) == visited.end()) {
+                minSpanTree[curVert][neighbor] = adjacencyMatrix[curVert][neighbor];
+                minSpanTree[neighbor][curVert] = adjacencyMatrix[curVert][neighbor];
+                visited.insert(neighbor);
+                bfsQueue.push(neighbor);
             }
         }
-
-        visited_vertices[minVertex] = true;
-
-        minimal_network[vertex][minVertex] = network[vertex][minVertex];
-        minimal_network[minVertex][vertex] = network[minVertex][vertex];
-
-        vertex = minVertex;
     }
 
-    return minimal_network;
+    return minSpanTree;
 }
-
-void print_matrix(vector<vector<int>> matrix) {
+void printMatrix(vector<vector<int>> matrix) {
     for (auto row : matrix) {
         for (auto k : row)
             cout << k << " ";
@@ -99,6 +93,8 @@ bool compareMatrices(const vector<vector<int>> &matrix1, const vector<vector<int
 int main() {
     string file = "network.txt";
     vector<vector<int>> network = getMatrix(file);
-    print_matrix(network);
+    printMatrix(network);
+    vector<vector<int>> minSpanTree = getMinSpanTree(network);
+    printMatrix(minSpanTree);
     return 0;
 }

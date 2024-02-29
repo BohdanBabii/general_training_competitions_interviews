@@ -1,0 +1,4 @@
+1. Research the difference between the algorithms by Edmonds-Karp and Ford-Fulkerson. Give an example where the Ford-Fulkerson-algorithm might take significantly longer than Edmonds-Karp.
+2. Describe your algorithm that solves the Problem 100 ("3n+1-problem"): what algorithmic techniques doid you use?
+    
+3. Which algorithm do you use for Problem 459 ("Graph Connectivity"), and why?

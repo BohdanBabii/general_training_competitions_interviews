@@ -1,0 +1,10 @@
+Describe one change that significantly decreased your program length (apart
+from the obvious: deleting comments or whitespaces). What did you change
+and how many characters did it save?
+    I have solved the Don't panic exercise, but because I started to late with the submissions, I have not optimized my code. So i am slightly over the maximum of 260 characters, with my 1266 characters.
+
+Assume you are participating in a code-golf challenge where you have to write
+an algorithm (in C++) that finds the shortest path between two specified
+nodes in a graph. Which of the discussed algorithms (see Lecture 8) would you
+implement, and why?
+    I would use the BFS algorithm, because it is relative easy to implement and guarantees the shortest paths.

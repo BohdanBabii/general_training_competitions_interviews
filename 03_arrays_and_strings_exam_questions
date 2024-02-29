@@ -1,0 +1,21 @@
+Outline an algorithm to convert a string to an unsigned integer (no negative numbers).
+    Initialize a result integer to 0. Iterate through the string from right to left, where the rightmost character is converted to an integer, by taking the ASCII value of the char and add it to result. Multiply result by 10 for each character and return result.
+
+Outline an algorithm to convert an unsigned integer to a string.
+    Just like the previous algorithm, but in reverse. Initialize a result string to an empty string. Iterate through the integer, taking the modulo 10. Convert the integer to a char with the ASCII value of the integer. Append the char to the front of the result string. Divide the integer by 10 and repeat until the integer is 0.
+
+Explain the characteristics of the character encodings ASCII, Extended ASCII, UTF-8, UTF-16 and UTF-32.
+    ASCII - 8 bit encoding, 256 characters, one byte for numeric values.
+    UTF-8 - superset of ASCII, uses first bits in the first byte to denote the number of actual bytes that should be read to retrieve the character fully
+    UTF-16 - 16 bit encoding, variable-sized encoding
+    UTF-32 - 32 bit encoding, fixed-sized encoding
+
+What advice can you give to modify strings as quickly as possible?
+    I would use stringbuffer or stringbuilder to modify strings as they are mutable and can be modified in place.
+
+Why are hardcoded regex expressions often much faster?
+    If regex contains a repeating, non changing pattern, searching for specific pattern can increase speed.
+
+
+Is run-length encoding a good compression method for strings?
+    Run-length encoding is a good compression method for strings that contain long sequences of repeating characters but it is not optimal for strings that contain a lot of unique characters.
